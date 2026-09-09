@@ -248,7 +248,8 @@ button { font: inherit; }
 .detail-screenshot-grid { display: grid; gap: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .detail-screenshot-grid figure { margin: 0; min-width: 0; }
 .detail-screenshot-frame { background: #eef2f8; border: 1px solid rgba(16,25,51,.12); }
-.detail-screenshot-frame.is-web { height: 620px; max-height: 620px; overflow-y: auto; overflow-x: hidden; }
+.detail-screenshot-frame.is-web { height: 250px; max-height: 250px; overflow-y: auto; overflow-x: hidden; }
+.detail-screenshot-frame.is-scrollable { height: 250px; max-height: 250px; overflow-y: auto; overflow-x: hidden; }
 .detail-screenshot-frame.is-mobile { max-height: 310px; overflow-y: auto; }
 .detail-screenshot-frame img { display: block; height: auto; max-height: none; object-fit: contain; width: 100%; }
 .detail-screenshot-grid figcaption { color: #737984; font: 9px var(--mono); padding-top: 9px; text-transform: uppercase; }
