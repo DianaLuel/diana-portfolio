@@ -16,7 +16,6 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import { toast } from "sonner";
 import { Link } from "wouter";
 
 type Category = "All" | "Product" | "Web" | "Visual";
@@ -33,6 +32,7 @@ export type Project = {
   tags: string[];
   palette: "blue" | "mint" | "orange" | "violet" | "lime" | "pink" | "sand" | "cyan" | "red";
   mockup: "map" | "medical" | "redcross" | "printing" | "travel" | "green" | "tutor" | "info" | "prototype";
+  realImage?: string;
   featured?: boolean;
   mobile?: boolean;
 };
@@ -50,6 +50,7 @@ export const projects: Project[] = [
     tags: ["UX strategy", "UI design", "React"],
     palette: "blue",
     mockup: "map",
+    realImage: "/project-screenshots/mseso/Home%20Page.png",
     featured: true,
     mobile: true,
   },
@@ -65,6 +66,7 @@ export const projects: Project[] = [
     tags: ["Healthcare", "Systems", "Figma"],
     palette: "mint",
     mockup: "medical",
+    realImage: "/project-screenshots/EMR/Main%20Dashboard.png",
     mobile: true,
   },
   {
@@ -79,6 +81,7 @@ export const projects: Project[] = [
     tags: ["Web design", "CMS", "Accessibility"],
     palette: "red",
     mockup: "redcross",
+    realImage: "/project-screenshots/ERCS/vol-%20ID%201.png",
   },
   {
     id: "nova",
@@ -92,6 +95,7 @@ export const projects: Project[] = [
     tags: ["Art direction", "Webflow", "Motion"],
     palette: "orange",
     mockup: "printing",
+    realImage: "/project-screenshots/Nova-Ecommerce/Home.png",
   },
   {
     id: "skyline",
@@ -105,6 +109,7 @@ export const projects: Project[] = [
     tags: ["Conversion", "Content", "Responsive"],
     palette: "violet",
     mockup: "travel",
+    realImage: "/project-screenshots/Skyline-Travel-Solution/Home.png",
   },
   {
     id: "weyra",
@@ -118,6 +123,7 @@ export const projects: Project[] = [
     tags: ["Brand system", "Sustainability", "Web"],
     palette: "lime",
     mockup: "green",
+    realImage: "/project-screenshots/werya-green/Home.png",
   },
   {
     id: "birhana",
@@ -131,6 +137,7 @@ export const projects: Project[] = [
     tags: ["Education", "UX writing", "React"],
     palette: "pink",
     mockup: "tutor",
+    realImage: "/project-screenshots/Birhana/landing%20page%202.png",
     mobile: true,
   },
   {
@@ -145,12 +152,22 @@ export const projects: Project[] = [
     tags: ["Infographics", "Data story", "Art direction"],
     palette: "sand",
     mockup: "info",
+    realImage: "/project-screenshots/Haburu/D1.png",
   },
 ];
 
 const filters: Category[] = ["All", "Product", "Web", "Visual"];
 
 export function DeviceMockup({ project, featured = false }: { project: Project; featured?: boolean }) {
+  if (project.realImage) {
+    return (
+      <div className={`device-stage real-project-preview ${featured ? "stage-featured" : ""}`}>
+        <img src={project.realImage} alt={`${project.name} homepage`} />
+        <span className="placeholder-label"><span /> Homepage preview</span>
+      </div>
+    );
+  }
+
   return (
     <div className={`device-stage stage-${project.palette} ${featured ? "stage-featured" : ""}`}>
       <div className="stage-noise" />
@@ -259,8 +276,6 @@ function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const visibleProjects = activeFilter === "All" ? projects : projects.filter((project) => project.category === activeFilter);
 
-  const showPlaceholder = (label: string) => toast(`${label} case study selected`);
-
   return (
     <div className="site-shell">
       <header className="site-header">
@@ -304,8 +319,8 @@ function Home() {
             <div className="filter-row" role="tablist" aria-label="Filter projects">{filters.map((filter) => <button key={filter} className={activeFilter === filter ? "filter-button active" : "filter-button"} type="button" onClick={() => setActiveFilter(filter)} role="tab" aria-selected={activeFilter === filter}>{filter}<span>{filter === "All" ? String(projects.length).padStart(2, "0") : String(projects.filter((p) => p.category === filter).length).padStart(2, "0")}</span></button>)}</div>
             <div className="projects-grid">
               {visibleProjects.map((project) => (
-                <article key={project.id} className={`project-card ${project.featured ? "project-featured" : ""}`}>
-                  <button className="project-visual-button" type="button" onClick={() => showPlaceholder(project.name)} aria-label={`View ${project.name} case study`}><DeviceMockup project={project} featured={project.featured} /></button>
+                <article key={project.id} className={`project-card ${project.featured ? "project-featured" : ""} ${project.id === "haburu" ? "project-haburu" : ""}`}>
+                  <button className="project-visual-button" type="button" aria-label={`View ${project.name} case study`}><DeviceMockup project={project} featured={project.featured} /></button>
                   <div className="project-info"><div className="project-title-row"><div><span className="project-number">{project.number} / {project.category}</span><h3>{project.name}</h3><p>{project.tagline}</p></div><Link className="project-arrow" href={`/work/${project.id}`} aria-label={`Open ${project.name} case study`}><ArrowUpRight size={18} /></Link></div><div className="project-bottom-row"><span>{project.role}</span><span>{project.year}</span><div className="project-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div></div>
                   {project.featured && <div className="featured-caption"><Zap size={14} /> Featured case study</div>}
                 </article>
