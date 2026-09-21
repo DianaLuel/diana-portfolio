@@ -45,7 +45,7 @@ export const projects: Project[] = [
     tagline: "Safer communities, smarter response.",
     description: "An access & safety platform that turns live context into confident action — with maps, alerts, and emergency-response workflows.",
     category: "Product",
-    year: "2024",
+    year: "2026",
     role: "Product design · Frontend",
     tags: ["UX strategy", "UI design", "React"],
     palette: "blue",
@@ -55,13 +55,27 @@ export const projects: Project[] = [
     mobile: true,
   },
   {
-    id: "cuamm",
+    id: "epsirs",
     number: "02",
+    name: "ePSIRS",
+    tagline: "Safer healthcare through better reporting.",
+    description: "A patient safety incident reporting system that helps healthcare teams report, track, and learn from incidents across Ethiopia.",
+    category: "Product",
+    year: "2025",
+    role: "Product design · Frontend",
+    tags: ["Healthcare", "Systems", "UI design"],
+    palette: "cyan",
+    mockup: "medical",
+    realImage: "/project-screenshots/ePSIRS/Landing.png",
+  },
+  {
+    id: "cuamm",
+    number: "03",
     name: "CUAMM EMR",
     tagline: "Smarter care, better health.",
     description: "An electronic medical records experience built to help healthcare professionals move through high-stakes moments with clarity.",
     category: "Product",
-    year: "2024",
+    year: "2025",
     role: "UX/UI design · Prototyping",
     tags: ["Healthcare", "Systems", "Figma"],
     palette: "mint",
@@ -71,12 +85,12 @@ export const projects: Project[] = [
   },
   {
     id: "ercs",
-    number: "03",
+    number: "04",
     name: "ERCS",
     tagline: "Serving humanity, saving lives.",
     description: "A focused digital home for the Ethiopian Red Cross Society — built to make support, stories, and action easier to find.",
     category: "Web",
-    year: "2023",
+    year: "2025",
     role: "Web design · Frontend",
     tags: ["Web design", "CMS", "Accessibility"],
     palette: "red",
@@ -85,12 +99,12 @@ export const projects: Project[] = [
   },
   {
     id: "nova",
-    number: "04",
+    number: "05",
     name: "Nova Printing & Advertising",
     tagline: "Print. Create. Inspire.",
     description: "A bold visual storefront for a printing and advertising company with a tactile, editorial product feel.",
     category: "Web",
-    year: "2023",
+    year: "2025",
     role: "Brand web · Frontend",
     tags: ["Art direction", "Webflow", "Motion"],
     palette: "orange",
@@ -99,12 +113,12 @@ export const projects: Project[] = [
   },
   {
     id: "skyline",
-    number: "05",
+    number: "06",
     name: "Skyline Travel Solution",
     tagline: "Your journey starts here.",
     description: "An education consultancy and travel services website that makes big life decisions feel a little more navigable.",
     category: "Web",
-    year: "2023",
+    year: "2025",
     role: "UX/UI design · Frontend",
     tags: ["Conversion", "Content", "Responsive"],
     palette: "violet",
@@ -113,12 +127,12 @@ export const projects: Project[] = [
   },
   {
     id: "weyra",
-    number: "06",
+    number: "07",
     name: "Weyra Green Tech",
     tagline: "Powering a greener future.",
     description: "A clean, optimistic brand presence for a green technology company working toward a more resilient tomorrow.",
     category: "Web",
-    year: "2023",
+    year: "2025",
     role: "Creative direction · UI",
     tags: ["Brand system", "Sustainability", "Web"],
     palette: "lime",
@@ -127,7 +141,7 @@ export const projects: Project[] = [
   },
   {
     id: "birhana",
-    number: "07",
+    number: "08",
     name: "Birhana Tutors",
     tagline: "Learn. Grow. Succeed.",
     description: "A welcoming education experience that helps learners and families discover the right support, faster.",
@@ -142,7 +156,7 @@ export const projects: Project[] = [
   },
   {
     id: "haburu",
-    number: "08",
+    number: "09",
     name: "Haburu Infographics",
     tagline: "Ideas made visible.",
     description: "A visual storytelling project translating complex ideas into clear, memorable infographic systems.",
@@ -309,7 +323,7 @@ function Home() {
           <div className="manifesto-inner">
             <SectionLabel index="00" label="The short version" />
             <div className="manifesto-grid"><h2>Good design is a quiet kind of <i>power.</i></h2><div className="manifesto-copy"><p>I partner with ambitious people to turn complicated ideas into clear, confident digital experiences — from first wireframe to final pixel.</p><a className="text-link" href="#about">More about me <ArrowUpRight size={15} /></a></div></div>
-            <div className="manifesto-stats"><div><b>08</b><span>selected<br />projects</span></div><div><b>03</b><span>design + build<br />disciplines</span></div><div><b>∞</b><span>curiosity<br />in reserve</span></div><div className="manifesto-asterisk"><Sparkles size={26} /></div></div>
+            <div className="manifesto-stats"><div><b>09</b><span>selected<br />projects</span></div><div><b>03</b><span>design + build<br />disciplines</span></div><div><b>∞</b><span>curiosity<br />in reserve</span></div><div className="manifesto-asterisk"><Sparkles size={26} /></div></div>
           </div>
         </section>
 

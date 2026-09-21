@@ -4,6 +4,7 @@ import { DeviceMockup, projects, type Project } from "./Home";
 
 const stories: Record<string, string> = {
   mseso: "I was excited to explore how technology can improve safety. Along the way, I learned to design for organizations and first responders, using maps and real-time information for faster emergency response.",
+  epsirs: "I was excited to explore how digital tools can make healthcare safer. Along the way, I learned to design for incident reporting, complex operational workflows, and the people who turn each report into meaningful improvement.",
   cuamm: "I was excited to work on this project and explore how digital tools can improve healthcare. Along the way, I learned more about designing for medical professionals, organizing complex information, and creating a simple experience for better patient care.",
   ercs: "I was excited to work on this project and explore how digital design can support humanitarian work. Along the way, I learned to create a clear, accessible experience for people and communities in need.",
   nova: "I was excited to work on this project and explore how design can showcase creative services. Along the way, I learned to organize information clearly and create a visual experience that reflects the brand.",
@@ -15,6 +16,7 @@ const stories: Record<string, string> = {
 
 const outcomes: Record<string, string[]> = {
   mseso: ["Mapped emergency-response journeys", "Designed for real-time information", "Built a clear safety operations system"],
+  epsirs: ["Made patient safety reporting easier to understand", "Organized incident tracking and follow-up workflows", "Connected reporting with learning and prevention"],
   cuamm: ["Organized complex patient information", "Created calmer clinical workflows", "Designed for medical professionals"],
   ercs: ["Prioritized accessibility and clarity", "Made support easier to discover", "Created a trustworthy humanitarian presence"],
   nova: ["Built a tactile visual language", "Organized creative services clearly", "Balanced expressive art direction with usability"],
@@ -38,6 +40,9 @@ function createScreenshots(folder: string, entries: Array<[string, string, boole
 const projectScreenshots: Record<string, ProjectScreenshot[]> = {
   mseso: createScreenshots("mseso", [
     ["Home Page.png", "MSESO homepage", false], ["Dashboard.png", "MSESO dashboard", false], ["Home.png", "MSESO mobile home", true], ["FAQ.png", "MSESO frequently asked questions", true], ["Nearby Help.png", "MSESO nearby help", true], ["Support-Maintenance.png", "MSESO support and maintenance", false], ["Alert control center.png", "MSESO alert control center", false], ["Communication Center 2.png", "MSESO communication center", false], ["Intro.png", "MSESO app introduction", true], ["Login3-1.png", "MSESO login screen", true], ["Reset Email.png", "MSESO reset email screen", true],
+  ]),
+  epsirs: createScreenshots("ePSIRS", [
+    ["Landing.png", "ePSIRS landing page", false], ["Dashboard.png", "ePSIRS dashboard", false], ["About Us.png", "ePSIRS about page", false], ["Notice Board.png", "ePSIRS notice board", false], ["Data.png", "ePSIRS data view", false], ["Esclation.png", "ePSIRS escalation workflow", false], ["Patient saftey team directory.png", "ePSIRS patient safety team directory", false], ["Referral.png", "ePSIRS referral workflow", false], ["Track.png", "ePSIRS incident tracking", false],
   ]),
   cuamm: createScreenshots("EMR", [
     ["Log in.png", "CUAMM login", false], ["Main Dashboard.png", "CUAMM main dashboard", false], ["ODP adult 0.png", "CUAMM adult patient record", false], ["ODP adult 2.png", "CUAMM adult patient details", false], ["Personal Info 3.png", "CUAMM personal information", false], ["Report.png", "CUAMM report", false], ["Search 3 - Profile.png", "CUAMM patient search", false], ["Settings 2.png", "CUAMM settings", false], ["Settings 3.png", "CUAMM settings details", false], ["Sickleave 1.png", "CUAMM sick leave", false], ["Sickleave 3.png", "CUAMM sick leave details", false],
