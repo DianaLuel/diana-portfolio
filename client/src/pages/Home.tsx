@@ -168,6 +168,50 @@ export const projects: Project[] = [
     mockup: "info",
     realImage: "/project-screenshots/Haburu/D1.png",
   },
+  {
+    id: "edtech",
+    number: "10",
+    name: "EdTech",
+    tagline: "Learn something new every day.",
+    description: "An online learning platform bringing courses, community, teachers, and learner support together in one welcoming experience.",
+    category: "Product",
+    year: "2026",
+    role: "UX/UI design · Frontend",
+    tags: ["Education", "Learning platform", "Responsive"],
+    palette: "violet",
+    mockup: "tutor",
+    realImage: "/project-screenshots/EdTech/1.png",
+  },
+  {
+    id: "flex-academy",
+    number: "11",
+    name: "Flex Academy",
+    tagline: "Build the kind of STR business you can actually run.",
+    description: "A practical learning experience helping short-term rental operators find a clear path from first steps to sustainable growth.",
+    category: "Web",
+    year: "2026",
+    role: "UX/UI design · Frontend",
+    tags: ["Hospitality", "Education", "Responsive"],
+    palette: "lime",
+    mockup: "travel",
+    realImage: "/project-screenshots/Flex-Academy/1440w%20default.png",
+    mobile: true,
+  },
+  {
+    id: "nova-hr",
+    number: "12",
+    name: "Nova HR",
+    tagline: "Better teams. Stronger business.",
+    description: "A people-first corporate website presenting Nova HR's recruitment, workforce, training, and operational support services.",
+    category: "Web",
+    year: "2026",
+    role: "UX/UI design · Frontend",
+    tags: ["Human resources", "Web design", "Responsive"],
+    palette: "cyan",
+    mockup: "green",
+    realImage: "/project-screenshots/Nova/home-%201440w%20default.png",
+    mobile: true,
+  },
 ];
 
 const filters: Category[] = ["All", "Product", "Web", "Visual"];
@@ -323,7 +367,7 @@ function Home() {
           <div className="manifesto-inner">
             <SectionLabel index="00" label="The short version" />
             <div className="manifesto-grid"><h2>Good design is a quiet kind of <i>power.</i></h2><div className="manifesto-copy"><p>I partner with ambitious people to turn complicated ideas into clear, confident digital experiences — from first wireframe to final pixel.</p><a className="text-link" href="#about">More about me <ArrowUpRight size={15} /></a></div></div>
-            <div className="manifesto-stats"><div><b>09</b><span>selected<br />projects</span></div><div><b>03</b><span>design + build<br />disciplines</span></div><div><b>∞</b><span>curiosity<br />in reserve</span></div><div className="manifesto-asterisk"><Sparkles size={26} /></div></div>
+            <div className="manifesto-stats"><div><b>{String(projects.length).padStart(2, "0")}</b><span>selected<br />projects</span></div><div><b>03</b><span>design + build<br />disciplines</span></div><div><b>∞</b><span>curiosity<br />in reserve</span></div><div className="manifesto-asterisk"><Sparkles size={26} /></div></div>
           </div>
         </section>
 

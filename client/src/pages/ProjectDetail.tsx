@@ -12,6 +12,9 @@ const stories: Record<string, string> = {
   weyra: "I was excited to work on this project and explore how digital design can communicate sustainability. Along the way, I learned to present complex ideas in a simple, engaging, and modern way.",
   birhana: "I enjoyed working on this project and exploring how design can make learning resources easier to access. Along the way, I learned to create a simple and engaging experience for students and tutors.",
   haburu: "I was excited to work on this project and explore how visual design can turn information into engaging stories. Along the way, I learned to communicate ideas clearly through layout, typography, and visuals.",
+  edtech: "I explored how an online learning platform can bring courses, community, teachers, and learner support into one clear experience.",
+  "flex-academy": "I explored how to help short-term rental operators move from early planning to a more confident, scalable business, with practical guidance and clear next steps.",
+  "nova-hr": "I worked on a digital presence for Nova HR, bringing its recruitment, workforce support, training, and people-first approach together in a clear, professional experience.",
 };
 
 const outcomes: Record<string, string[]> = {
@@ -24,6 +27,9 @@ const outcomes: Record<string, string[]> = {
   weyra: ["Translated sustainability into visual stories", "Made complex technology approachable", "Created an optimistic, modern web presence"],
   birhana: ["Made learning support easier to find", "Designed for students and tutors", "Created a warm, engaging education experience"],
   haburu: ["Turned information into visual stories", "Used layout and typography for clarity", "Explored memorable infographic systems"],
+  edtech: ["Brought courses, community, and support into one learning experience", "Made learning benefits easy to scan", "Created a clear path from discovery to getting started"],
+  "flex-academy": ["Framed the journey from first steps to scaling a rental business", "Organized practical guidance into clear sections", "Kept next steps visible across desktop and mobile"],
+  "nova-hr": ["Organized HR services and company information", "Made people, services, and events easy to discover", "Kept the experience consistent across desktop and mobile"],
 };
 
 type ProjectScreenshot = { src: string; alt: string; isMobile: boolean; isScrollable: boolean };
@@ -55,6 +61,9 @@ const projectScreenshots: Record<string, ProjectScreenshot[]> = {
   weyra: createScreenshots("werya-green", [["Home.png", "Weyra homepage", false], ["Home - Mobile.png", "Weyra mobile homepage", true], ["About.png", "Weyra about page", false], ["Service.png", "Weyra services", false], ["Contact.png", "Weyra contact page", false]]),
   birhana: createScreenshots("Birhana", [["landing page 2.png", "Birhana landing page", false], ["courses.png", "Birhana courses", false], ["admin dashboard.png", "Birhana admin dashboard", false], ["admin dashboard-1.png", "Birhana admin dashboard details", false], ["admin dashboard-2.png", "Birhana admin dashboard view", false], ["admin dashboard-3.png", "Birhana admin dashboard reports", false], ["admin tutors.png", "Birhana tutor management", false], ["tutor detail.png", "Birhana tutor details", false], ["Tutor dashboard/overview.png", "Birhana tutor dashboard", false], ["Tutor dashboard/my schedule.png", "Birhana tutor schedule", false], ["Student dashboeard/Find tutor.png", "Birhana find tutor", false], ["Student dashboeard/My Sessions.png", "Birhana student sessions", false], ["Student dashboeard/Play-Course.png", "Birhana course player", false], ["Verify tutor/certifications.png", "Birhana tutor certifications", false], ["sign up/Frame 1321314143.png", "Birhana signup", false], ["sign up/Reset password Page student.png", "Birhana reset password", false], ["sign up/tutor/Login Page.png", "Birhana tutor login", false]]),
   haburu: createScreenshots("Haburu", [["D1.png", "Haburu infographic one", false], ["D2.png", "Haburu infographic two", false], ["D3.png", "Haburu infographic three", false]]),
+  edtech: createScreenshots("EdTech", [["1.png", "EdTech homepage and learning features", false], ["3.png", "EdTech login", false], ["4.png", "EdTech learner homepage", false], ["5.png", "EdTech course catalog", false], ["6.png", "EdTech learner dashboard", false]]),
+  "flex-academy": createScreenshots("Flex-Academy", [["1440w default.png", "Flex Academy desktop homepage", false], ["390w default.png", "Flex Academy mobile homepage", true], ["Dialog.png", "Flex Academy learning content", false], ["Dialog2.png", "Flex Academy learning content details", false], ["Redey to scale.png", "Flex Academy readiness guide", false], ["checklist.png", "Flex Academy checklist", false], ["scale2.png", "Flex Academy scaling guide", false], ["scale3.png", "Flex Academy scaling resources", false]]),
+  "nova-hr": createScreenshots("Nova", [["home- 1440w default.png", "Nova HR desktop homepage", false], ["home- 390w default.png", "Nova HR mobile homepage", true], ["about- 1440w default.png", "Nova HR about page", false], ["about- 390w default.png", "Nova HR mobile about page", true], ["service- 1440w default.png", "Nova HR services page", false], ["service- 390w default.png", "Nova HR mobile services page", true], ["package - 1440w default.png", "Nova HR packages page", false], ["package - 390w default.png", "Nova HR mobile packages page", true], ["events - 1440w default.png", "Nova HR events page", false], ["events - 390w default.png", "Nova HR mobile events page", true], ["conact - 1440w default.png", "Nova HR contact page", false], ["conact - 390w default.png", "Nova HR mobile contact page", true]]),
 };
 
 function getProject(id: string | undefined): Project | undefined {
