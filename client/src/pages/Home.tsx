@@ -6,7 +6,10 @@ import {
   Check,
   ChevronDown,
   Code2,
+  Dribbble,
   ExternalLink,
+  Github,
+  Linkedin,
   Layers3,
   Mail,
   Menu,
@@ -17,6 +20,30 @@ import {
   Zap,
 } from "lucide-react";
 import { Link } from "wouter";
+
+const freelanceProfiles = [
+  { name: "Fiverr", href: "https://www.fiverr.com/sellers/dianaluel/", icon: "fiverr" },
+  { name: "Upwork", href: "https://www.upwork.com/freelancers/~0199382e60453be252", icon: "upwork" },
+  { name: "GitHub", href: "https://github.com/DianaLuel", icon: "github" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/dianaluel/", icon: "linkedin" },
+  { name: "Dribbble", href: "https://dribbble.com/diana-luel", icon: "dribbble" },
+] as const;
+
+function ProfileLinks() {
+  return (
+    <div className="profile-links" aria-label="Freelance and social profiles">
+      {freelanceProfiles.map(({ name, href, icon }) => (
+        <a key={name} href={href} target="_blank" rel="noreferrer" aria-label={`${name} profile (opens in a new tab)`}>
+          <span className={`profile-icon profile-icon-${icon}`} aria-hidden="true">
+            {icon === "github" ? <Github size={17} /> : icon === "linkedin" ? <Linkedin size={17} /> : icon === "dribbble" ? <Dribbble size={17} /> : icon === "fiverr" ? "fi" : "Up"}
+          </span>
+          <span>{name}</span>
+          <ExternalLink size={12} aria-hidden="true" />
+        </a>
+      ))}
+    </div>
+  );
+}
 
 type Category = "All" | "Product" | "Web" | "Visual";
 
@@ -335,20 +362,20 @@ function Home() {
   const visibleProjects = activeFilter === "All" ? projects : projects.filter((project) => project.category === activeFilter);
 
   return (
-    <div className="site-shell">
+    <div className="site-shell" id="top">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Back to top"><span>DIANA LUEL</span></a>
-        <nav className={`nav-links ${menuOpen ? "is-open" : ""}`} aria-label="Main navigation">
+        <nav id="main-navigation" className={`nav-links ${menuOpen ? "is-open" : ""}`} aria-label="Main navigation">
           <a href="#work" onClick={() => setMenuOpen(false)}>Work <span>01</span></a>
           <a href="#services" onClick={() => setMenuOpen(false)}>Services <span>02</span></a>
           <a href="#about" onClick={() => setMenuOpen(false)}>About <span>03</span></a>
           <a href="#contact" onClick={() => setMenuOpen(false)}>Contact <span>04</span></a>
         </nav>
         <a className="header-availability" href="#contact"><span className="status-dot" /> Available for select projects</a>
-        <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
+        <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation">{menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
       </header>
 
-      <main id="top">
+      <main>
         <section className="hero-section">
           <div className="hero-visual" aria-hidden="true" />
           <div className="hero-grain" aria-hidden="true" />
@@ -397,13 +424,13 @@ function Home() {
         </section>
 
         <section className="about-section" id="about">
-          <div className="about-inner"><SectionLabel index="03" label="A little context" /><div className="about-grid"><div className="portrait-placeholder"><img className="portrait-photo" src="/images/diana luel.png" alt="Diana Luel wearing a red floral dress" /><div className="portrait-orbit orbit-one" /><div className="portrait-orbit orbit-two" /><span className="portrait-coordinates">09° 01' N<br />38° 45' E</span></div><div className="about-copy"><p className="about-kicker">The person behind the pixels</p><h2>Hi, I’m <i>Diana Luel.</i></h2><p>I’m a UI/UX designer and frontend developer drawn to the space between structure and expression. I like working closely, asking better questions, and making the complicated feel considered.</p><p>I work across Figma, HTML, CSS, JavaScript, documentation, WordPress, and Wix — shaping digital experiences from first idea to final detail.</p><div className="about-links"><a href="#contact">Let’s work together <ArrowUpRight size={15} /></a><a href="https://github.com/DianaLuel" target="_blank" rel="noreferrer">GitHub profile <ArrowUpRight size={15} /></a><a href="https://www.linkedin.com/in/dianaluel/" target="_blank" rel="noreferrer">LinkedIn profile <ArrowUpRight size={15} /></a><a href="https://dribbble.com/diana-luel" target="_blank" rel="noreferrer">Dribbble profile <ArrowUpRight size={15} /></a></div></div></div></div>
+          <div className="about-inner"><SectionLabel index="03" label="A little context" /><div className="about-grid"><div className="portrait-placeholder"><img className="portrait-photo" src="/images/diana luel.png" alt="Diana Luel wearing a red floral dress" /><div className="portrait-orbit orbit-one" /><div className="portrait-orbit orbit-two" /><span className="portrait-coordinates">09° 01' N<br />38° 45' E</span></div><div className="about-copy"><p className="about-kicker">The person behind the pixels</p><h2>Hi, I’m <i>Diana Luel.</i></h2><p>I’m a UI/UX designer and frontend developer drawn to the space between structure and expression. I like working closely, asking better questions, and making the complicated feel considered.</p><p>I work across Figma, HTML, CSS, JavaScript, documentation, WordPress, and Wix — shaping digital experiences from first idea to final detail.</p><div className="about-links"><a href="#contact">Let’s work together <ArrowUpRight size={15} /></a></div><ProfileLinks /></div></div></div>
         </section>
 
-        <section className="contact-section" id="contact"><div className="contact-inner"><div className="contact-orbit" /><SectionLabel index="04" label="Start a conversation" /><div className="contact-copy"><p className="contact-kicker">Have a good idea?</p><h2>Let’s make it<br /><i>feel real.</i></h2><a className="contact-email" href="mailto:lueldiana@gmail.com">lueldiana@gmail.com <ArrowUpRight size={24} /></a><a className="contact-phone" href="tel:0989365343">0989365343</a></div><div className="contact-bottom"><span>Available for select freelance & collaboration projects</span><span>© 2026 Diana Luel</span></div></div></section>
+        <section className="contact-section" id="contact"><div className="contact-inner"><div className="contact-orbit" /><SectionLabel index="04" label="Start a conversation" /><div className="contact-copy"><p className="contact-kicker">Have a good idea?</p><h2>Let’s make it<br /><i>feel real.</i></h2><a className="contact-email" href="mailto:lueldiana@gmail.com">lueldiana@gmail.com <ArrowUpRight size={24} /></a><a className="contact-phone" href="tel:+251989365343" aria-label="Call Diana Luel at +251 989 365 343"><span className="ethiopia-flag" aria-hidden="true">🇪🇹</span><span>+251 989 365 343</span></a></div><div className="contact-bottom"><span>Available for select freelance & collaboration projects</span><span>© 2026 Diana Luel</span></div></div></section>
       </main>
 
-      <footer className="site-footer"><a className="brand" href="#top"><span>DIANA LUEL</span></a><span>Designed with intent. Built with care.</span><div className="footer-links"><a href="#work">Work</a><a href="#about">About</a><a href="mailto:lueldiana@gmail.com">Email</a><a href="tel:0989365343">Call</a><a href="https://dribbble.com/diana-luel" target="_blank" rel="noreferrer">Dribbble</a></div></footer>
+      <footer className="site-footer"><a className="brand" href="#top"><span>DIANA LUEL</span></a><span>Designed with intent. Built with care.</span><div className="footer-links"><a href="#work">Work</a><a href="#about">About</a><a href="mailto:lueldiana@gmail.com">Email</a><a href="tel:+251989365343">Call</a></div></footer>
     </div>
   );
 }

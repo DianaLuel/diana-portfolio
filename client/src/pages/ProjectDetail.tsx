@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Link, useRoute } from "wouter";
@@ -77,6 +77,10 @@ export default function ProjectDetail() {
   const project = getProject(params?.id);
   const [activeScreenshotIndex, setActiveScreenshotIndex] = useState<number | null>(null);
   const touchStartX = useRef<number | null>(null);
+  const galleryViewportRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    galleryViewportRef.current?.scrollTo(0, 0);
+  }, [activeScreenshotIndex]);
 
   if (!project) {
     return <div className="not-found-detail"><Link href="/">← Back home</Link><h1>Project not found.</h1></div>;
@@ -138,7 +142,7 @@ export default function ProjectDetail() {
               <DialogTitle className="sr-only">{activeScreenshot.alt}</DialogTitle>
               <DialogDescription className="sr-only">Project screenshot {activeScreenshotIndex! + 1} of {screenshots.length}. Use the arrow keys or swipe to browse.</DialogDescription>
               <div
-                className="project-gallery-viewer"
+                className={`project-gallery-viewer ${activeScreenshot.isMobile ? "is-mobile" : "is-desktop"}`}
                 onTouchStart={(event) => { touchStartX.current = event.touches[0]?.clientX ?? null; }}
                 onTouchEnd={(event) => {
                   const endX = event.changedTouches[0]?.clientX;
@@ -148,7 +152,9 @@ export default function ProjectDetail() {
                   touchStartX.current = null;
                 }}
               >
-                <img className="project-gallery-image" src={activeScreenshot.src} alt={activeScreenshot.alt} />
+                <div className={`project-gallery-artboard ${activeScreenshot.isMobile ? "is-mobile" : "is-desktop"}`} ref={galleryViewportRef}>
+                  <img className="project-gallery-image" src={activeScreenshot.src} alt={activeScreenshot.alt} decoding="async" fetchPriority="high" />
+                </div>
                 <button className="project-gallery-close" type="button" aria-label="Close image gallery" onClick={() => setActiveScreenshotIndex(null)}><X size={22} /></button>
                 {screenshots.length > 1 && (
                   <>
