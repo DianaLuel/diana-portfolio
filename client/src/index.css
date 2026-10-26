@@ -272,7 +272,7 @@ button { font: inherit; }
 .detail-mobile-grid .detail-screenshot-frame { height: 280px; max-height: 280px; overflow-y: auto; }
 @media (max-width: 760px) { .detail-real-shot { margin-top: 0; } .detail-real-shot img { max-height: none; } .detail-screenshot-grid { grid-template-columns: 1fr; } .detail-mobile-grid { column-count: 2; column-gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); } .detail-mobile-grid figure { margin-bottom: 14px; } }
 
-.project-gallery-dialog { background: #080a10 !important; border: 0 !important; display: block !important; height: 100dvh !important; inset: 0 !important; max-height: none !important; max-width: none !important; overflow: hidden; padding: 0 !important; position: fixed !important; transform: none !important; translate: none !important; width: 100vw !important; z-index: 60 !important; }
+.project-gallery-dialog { background: #080a10 !important; border: 0 !important; display: block !important; height: 100dvh !important; inset: 0 !important; max-height: none !important; max-width: none !important; overflow: hidden; padding: 0 !important; position: fixed !important; width: 100vw !important; z-index: 60 !important; }
 .project-gallery-dialog:focus { outline: none; }
 .project-gallery-viewer { align-items: center; display: flex; height: 100%; justify-content: center; inset: 0; padding: 0; position: absolute; touch-action: pan-y; width: 100%; }
 .project-gallery-artboard { background: #f6f0e8; flex: 0 0 auto; overflow: auto; overscroll-behavior: contain; scrollbar-color: rgba(16,25,51,.35) transparent; scrollbar-width: thin; transform: translateX(5px); }

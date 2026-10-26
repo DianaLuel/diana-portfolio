@@ -127,6 +127,7 @@ export default function ProjectDetail() {
         <DialogContent
           className="project-gallery-dialog"
           showCloseButton={false}
+          centered={false}
           onKeyDown={(event) => {
             if (event.key === "ArrowLeft") {
               event.preventDefault();
