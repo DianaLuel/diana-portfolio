@@ -1,4 +1,6 @@
-import { ArrowLeft, ArrowUpRight, CheckCircle2, ExternalLink } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, ChevronLeft, ChevronRight, ExternalLink, X } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Link, useRoute } from "wouter";
 import { DeviceMockup, projects, type Project } from "./Home";
 
@@ -73,10 +75,32 @@ function getProject(id: string | undefined): Project | undefined {
 export default function ProjectDetail() {
   const [, params] = useRoute("/work/:id");
   const project = getProject(params?.id);
+  const [activeScreenshotIndex, setActiveScreenshotIndex] = useState<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   if (!project) {
     return <div className="not-found-detail"><Link href="/">← Back home</Link><h1>Project not found.</h1></div>;
   }
+
+  const screenshots = projectScreenshots[project.id] || [];
+  const activeScreenshot = activeScreenshotIndex === null ? undefined : screenshots[activeScreenshotIndex];
+  const changeScreenshot = (direction: number) => {
+    setActiveScreenshotIndex((current) => current === null ? current : (current + direction + screenshots.length) % screenshots.length);
+  };
+  const renderScreenshot = (screenshot: ProjectScreenshot) => {
+    const screenshotIndex = screenshots.indexOf(screenshot);
+
+    return (
+      <figure key={screenshot.src}>
+        <button className="detail-screenshot-open" type="button" aria-label={`View ${screenshot.alt} full screen`} aria-haspopup="dialog" onClick={() => setActiveScreenshotIndex(screenshotIndex)}>
+          <div className={`detail-screenshot-frame ${screenshot.isMobile ? "is-mobile" : `is-web ${screenshot.isScrollable ? "is-scrollable" : ""}`}`}>
+            <img src={screenshot.src} alt={screenshot.alt} loading="lazy" />
+          </div>
+        </button>
+        <figcaption>{screenshot.alt}</figcaption>
+      </figure>
+    );
+  };
 
   return (
     <div className="detail-page">
@@ -90,11 +114,54 @@ export default function ProjectDetail() {
           <div className="detail-hero-copy"><span className="detail-overline">{project.number} / {project.category} / {project.year}</span><h1>{project.name}</h1><p>{project.tagline}</p><div className="detail-hero-meta"><span>{project.role}</span><span>{project.tags.join(" · ")}</span></div></div>
           <div className="detail-hero-visual"><DeviceMockup project={project} featured /></div>
         </section>
-        <section className="detail-story"><div className="detail-story-intro"><span className="detail-section-label">The project</span><h2>A closer look at<br /><i>the thinking.</i></h2></div><div className="detail-story-copy"><p>{stories[project.id]}</p><div className="detail-facts"><div><span>Role</span><b>{project.role}</b></div><div><span>Year</span><b>{project.year}</b></div><div><span>Tools</span><b>{project.tags.join(" · ")}</b></div></div></div>{projectScreenshots[project.id]?.length > 0 && <div className="detail-real-shot"><span className="detail-section-label">Product screens</span><div className="detail-screenshot-group"><h3>Web experience</h3><div className="detail-screenshot-grid detail-web-grid">{projectScreenshots[project.id].filter((screenshot) => !screenshot.isMobile).map((screenshot) => <figure key={screenshot.src}><div className={`detail-screenshot-frame is-web ${screenshot.isScrollable ? "is-scrollable" : ""}` }><img src={screenshot.src} alt={screenshot.alt} loading="lazy" /></div><figcaption>{screenshot.alt}</figcaption></figure>)}</div></div>{projectScreenshots[project.id].some((screenshot) => screenshot.isMobile) && <div className="detail-screenshot-group"><h3>Mobile experience</h3><div className="detail-screenshot-grid detail-mobile-grid">{projectScreenshots[project.id].filter((screenshot) => screenshot.isMobile).map((screenshot) => <figure key={screenshot.src}><div className="detail-screenshot-frame is-mobile"><img src={screenshot.src} alt={screenshot.alt} loading="lazy" /></div><figcaption>{screenshot.alt}</figcaption></figure>)}</div></div>}</div>}</section>
+        <section className="detail-story"><div className="detail-story-intro"><span className="detail-section-label">The project</span><h2>A closer look at<br /><i>the thinking.</i></h2></div><div className="detail-story-copy"><p>{stories[project.id]}</p><div className="detail-facts"><div><span>Role</span><b>{project.role}</b></div><div><span>Year</span><b>{project.year}</b></div><div><span>Tools</span><b>{project.tags.join(" · ")}</b></div></div></div>{screenshots.length > 0 && <div className="detail-real-shot"><span className="detail-section-label">Product screens</span><div className="detail-screenshot-group"><h3>Web experience</h3><div className="detail-screenshot-grid detail-web-grid">{screenshots.filter((screenshot) => !screenshot.isMobile).map(renderScreenshot)}</div></div>{screenshots.some((screenshot) => screenshot.isMobile) && <div className="detail-screenshot-group"><h3>Mobile experience</h3><div className="detail-screenshot-grid detail-mobile-grid">{screenshots.filter((screenshot) => screenshot.isMobile).map(renderScreenshot)}</div></div>}</div>}</section>
         <section className="detail-outcomes"><div className="detail-outcomes-heading"><span className="detail-section-label">What I explored</span><p>Designing with intent means making space for the problem first — then shaping a useful response.</p></div><div className="outcome-list">{(outcomes[project.id] || []).map((outcome, index) => <div className="outcome-row" key={outcome}><span>0{index + 1}</span><CheckCircle2 size={19} /><b>{outcome}</b></div>)}</div></section>
         <section className="detail-next"><Link href="/" className="detail-next-link"><span>Back to selected work</span><ArrowUpRight size={20} /></Link></section>
       </main>
       <footer className="site-footer"><Link className="brand" href="/"><span>DIANA LUEL</span></Link><span>Let’s make something useful.</span><a href="mailto:lueldiana@gmail.com">lueldiana@gmail.com</a></footer>
+      <Dialog open={activeScreenshotIndex !== null} onOpenChange={(open) => { if (!open) setActiveScreenshotIndex(null); }}>
+        <DialogContent
+          className="project-gallery-dialog"
+          showCloseButton={false}
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              changeScreenshot(-1);
+            } else if (event.key === "ArrowRight") {
+              event.preventDefault();
+              changeScreenshot(1);
+            }
+          }}
+        >
+          {activeScreenshot && (
+            <>
+              <DialogTitle className="sr-only">{activeScreenshot.alt}</DialogTitle>
+              <DialogDescription className="sr-only">Project screenshot {activeScreenshotIndex! + 1} of {screenshots.length}. Use the arrow keys or swipe to browse.</DialogDescription>
+              <div
+                className="project-gallery-viewer"
+                onTouchStart={(event) => { touchStartX.current = event.touches[0]?.clientX ?? null; }}
+                onTouchEnd={(event) => {
+                  const endX = event.changedTouches[0]?.clientX;
+                  if (touchStartX.current !== null && endX !== undefined && Math.abs(endX - touchStartX.current) > 45) {
+                    changeScreenshot(endX < touchStartX.current ? 1 : -1);
+                  }
+                  touchStartX.current = null;
+                }}
+              >
+                <img className="project-gallery-image" src={activeScreenshot.src} alt={activeScreenshot.alt} />
+                <button className="project-gallery-close" type="button" aria-label="Close image gallery" onClick={() => setActiveScreenshotIndex(null)}><X size={22} /></button>
+                {screenshots.length > 1 && (
+                  <>
+                    <button className="project-gallery-nav previous" type="button" aria-label="Previous image" onClick={() => changeScreenshot(-1)}><ChevronLeft size={28} /></button>
+                    <button className="project-gallery-nav next" type="button" aria-label="Next image" onClick={() => changeScreenshot(1)}><ChevronRight size={28} /></button>
+                  </>
+                )}
+                <div className="project-gallery-caption"><span>{activeScreenshot.alt}</span><span>{String(activeScreenshotIndex! + 1).padStart(2, "0")} / {String(screenshots.length).padStart(2, "0")}</span></div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
